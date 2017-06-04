@@ -1,10 +1,11 @@
 package com.github.plushaze.traynotification.animations;
 
-import com.github.plushaze.traynotification.models.CustomStage;
-
 import java.util.function.Function;
 
-public enum Animations {
+import com.github.plushaze.traynotification.models.CustomStage;
+
+public enum Animations
+{
 
 	SLIDE(SlideAnimation::new),
 	FADE(FadeAnimation::new),
@@ -12,11 +13,13 @@ public enum Animations {
 
 	private final Function<CustomStage, Animation> newInstance;
 
-	Animations(Function<CustomStage, Animation> newInstance) {
+	Animations(final Function<CustomStage, Animation> newInstance)
+	{
 		this.newInstance = newInstance;
 	}
 
-	public Animation newInstance(CustomStage stage) {
+	public Animation newInstance(final CustomStage stage)
+	{
 		return newInstance.apply(stage);
 	}
 

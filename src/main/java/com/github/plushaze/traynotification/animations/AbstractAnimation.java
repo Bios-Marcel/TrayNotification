@@ -1,20 +1,23 @@
 package com.github.plushaze.traynotification.animations;
 
 import com.github.plushaze.traynotification.models.CustomStage;
+
 import javafx.animation.SequentialTransition;
 import javafx.animation.Timeline;
 import javafx.util.Duration;
 
-public abstract class AbstractAnimation implements Animation {
+public abstract class AbstractAnimation implements Animation
+{
 
 	protected final CustomStage stage;
 
-	protected final Timeline showAnimation, dismissAnimation;
-	protected final SequentialTransition sq;
+	protected final Timeline				showAnimation, dismissAnimation;
+	protected final SequentialTransition	sq;
 
 	protected volatile boolean trayIsShowing;
 
-	protected AbstractAnimation(CustomStage stage) {
+	protected AbstractAnimation(final CustomStage stage)
+	{
 		this.stage = stage;
 
 		showAnimation = setupShowAnimation();
@@ -28,28 +31,33 @@ public abstract class AbstractAnimation implements Animation {
 	protected abstract Timeline setupDismissAnimation();
 
 	@Override
-	public final CustomStage getStage() {
+	public final CustomStage getStage()
+	{
 		return stage;
 	}
 
 	@Override
-	public final void playSequential(Duration dismissDelay) {
+	public final void playSequential(final Duration dismissDelay)
+	{
 		sq.getChildren().get(1).setDelay(dismissDelay);
 		sq.play();
 	}
 
 	@Override
-	public final void playShowAnimation() {
+	public final void playShowAnimation()
+	{
 		showAnimation.play();
 	}
 
 	@Override
-	public final void playDismissAnimation() {
+	public final void playDismissAnimation()
+	{
 		dismissAnimation.play();
 	}
 
 	@Override
-	public final boolean isShowing() {
+	public final boolean isShowing()
+	{
 		return trayIsShowing;
 	}
 

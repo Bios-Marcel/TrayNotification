@@ -7,71 +7,83 @@ import javafx.stage.Screen;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
 
-public class CustomStage extends Stage {
+public class CustomStage extends Stage
+{
 
 	private final Location bottomRight;
 
-	public CustomStage(AnchorPane ap, StageStyle style) {
+	public CustomStage(final AnchorPane ap, final StageStyle style)
+	{
 		initStyle(style);
 
 		setSize(ap.getPrefWidth(), ap.getPrefHeight());
 
-		Rectangle2D screenBounds = Screen.getPrimary().getVisualBounds();
-		double x = screenBounds.getMinX() + screenBounds.getWidth() - ap.getPrefWidth() - 2;
-		double y = screenBounds.getMinY() + screenBounds.getHeight() - ap.getPrefHeight() - 2;
+		final Rectangle2D screenBounds = Screen.getPrimary().getVisualBounds();
+		final double x = screenBounds.getMinX() + screenBounds.getWidth() - ap.getPrefWidth() - 2;
+		final double y = screenBounds.getMinY() + screenBounds.getHeight() - ap.getPrefHeight() - 2;
 
 		bottomRight = Location.at(x, y);
 	}
 
-	public Location getBottomRight() {
+	public Location getBottomRight()
+	{
 		return bottomRight;
 	}
 
-	public void setSize(double width, double height) {
+	public void setSize(final double width, final double height)
+	{
 		setWidth(width);
 		setHeight(height);
 	}
 
-	public Location getOffScreenBounds() {
-		Location loc = getBottomRight();
+	public Location getOffScreenBounds()
+	{
+		final Location loc = getBottomRight();
 
 		return Location.at(loc.getX() + this.getWidth(), loc.getY());
 	}
 
-	public void setLocation(Location loc) {
+	public void setLocation(final Location loc)
+	{
 		setX(loc.getX());
 		setY(loc.getY());
 	}
 
-	private SimpleDoubleProperty xLocationProperty = new SimpleDoubleProperty() {
+	private final SimpleDoubleProperty xLocationProperty = new SimpleDoubleProperty() {
 		@Override
-		public void set(double newValue) {
+		public void set(final double newValue)
+		{
 			setX(newValue);
 		}
 
 		@Override
-		public double get() {
+		public double get()
+		{
 			return getX();
 		}
 	};
 
-	public SimpleDoubleProperty xLocationProperty() {
+	public SimpleDoubleProperty xLocationProperty()
+	{
 		return xLocationProperty;
 	}
 
-	private SimpleDoubleProperty yLocationProperty = new SimpleDoubleProperty() {
+	private final SimpleDoubleProperty yLocationProperty = new SimpleDoubleProperty() {
 		@Override
-		public void set(double newValue) {
+		public void set(final double newValue)
+		{
 			setY(newValue);
 		}
 
 		@Override
-		public double get() {
+		public double get()
+		{
 			return getY();
 		}
 	};
 
-	public SimpleDoubleProperty yLocationProperty() {
+	public SimpleDoubleProperty yLocationProperty()
+	{
 		return yLocationProperty;
 	}
 

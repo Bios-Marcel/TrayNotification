@@ -1,6 +1,7 @@
 package com.github.plushaze.traynotification.notification;
 
-public interface Notification {
+public interface Notification
+{
 
 	String getURLResource();
 

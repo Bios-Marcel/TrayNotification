@@ -1,6 +1,7 @@
 package com.github.plushaze.traynotification.notification;
 
-public enum Notifications implements Notification {
+public enum Notifications implements Notification
+{
 
 	INFORMATION("images/info.png", "#2C54AB"),
 	NOTICE("images/notice.png", "#8D9695"),
@@ -8,21 +9,24 @@ public enum Notifications implements Notification {
 	WARNING("images/warning.png", "#E23E0A"),
 	ERROR("images/error.png", "#CC0033");
 
-	private final String urlResource;
-	private final String paintHex;
+	private final String	urlResource;
+	private final String	paintHex;
 
-	Notifications(String urlResource, String paintHex) {
+	Notifications(final String urlResource, final String paintHex)
+	{
 		this.urlResource = urlResource;
 		this.paintHex = paintHex;
 	}
 
 	@Override
-	public String getURLResource() {
+	public String getURLResource()
+	{
 		return urlResource;
 	}
 
 	@Override
-	public String getPaintHex() {
+	public String getPaintHex()
+	{
 		return paintHex;
 	}
 

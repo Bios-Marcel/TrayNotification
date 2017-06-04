@@ -1,14 +1,17 @@
 package com.github.plushaze.traynotification.animations;
 
 import com.github.plushaze.traynotification.models.CustomStage;
+
 import javafx.util.Duration;
 
-public interface Animation {
+public interface Animation
+{
 
 	/**
 	 * Plays both the show and dismiss animation using a sequential transition object
 	 *
-	 * @param dismissDelay Amount of delay before starting the dismiss animation
+	 * @param dismissDelay
+	 *            Amount of delay before starting the dismiss animation
 	 */
 	void playSequential(Duration dismissDelay);
 
