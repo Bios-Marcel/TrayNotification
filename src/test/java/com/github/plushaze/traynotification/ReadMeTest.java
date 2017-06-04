@@ -18,7 +18,6 @@ import com.github.plushaze.traynotification.notification.TrayNotificationBuilder
 import javafx.application.Platform;
 import javafx.embed.swing.JFXPanel;
 import javafx.scene.image.Image;
-import javafx.scene.paint.Paint;
 import javafx.util.Duration;
 
 public final class ReadMeTest
@@ -87,7 +86,7 @@ public final class ReadMeTest
 		{
 			tray.setTitle("New WhatsApp Message");
 			tray.setMessage("Github - I like your new notification release. Nice one.");
-			tray.setRectangleFill(Paint.valueOf("#2A9A84"));
+			tray.setRectangleFill("#2A9A84");
 			tray.setAnimation(Animations.POPUP);
 			tray.setImage(whatsAppImg);
 			tray.showAndDismiss(Duration.seconds(2));

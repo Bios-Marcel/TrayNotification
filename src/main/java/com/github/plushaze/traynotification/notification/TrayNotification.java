@@ -17,9 +17,7 @@ import javafx.scene.Scene;
 import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
-import javafx.scene.layout.AnchorPane;
-import javafx.scene.paint.Paint;
-import javafx.scene.shape.Rectangle;
+import javafx.scene.layout.Pane;
 import javafx.stage.StageStyle;
 import javafx.util.Duration;
 
@@ -31,9 +29,9 @@ public final class TrayNotification
 	@FXML
 	private ImageView	imageIcon;
 	@FXML
-	private Rectangle	rectangleColor;
+	private Pane		rectangleColor;
 	@FXML
-	private AnchorPane	rootNode;
+	private Pane		rootNode;
 
 	private CustomStage					stage;
 	private Notification				notification;
@@ -91,7 +89,6 @@ public final class TrayNotification
 		stage.setLocation(stage.getBottomRight());
 		if (Objects.nonNull(styleSheetLocation))
 		{
-			System.out.println("Setting style");
 			stage.getScene().getStylesheets().add(styleSheetLocation);
 		}
 
@@ -103,7 +100,7 @@ public final class TrayNotification
 		notification = nType;
 
 		final URL imageLocation = getClass().getClassLoader().getResource(nType.getURLResource());
-		setRectangleFill(Paint.valueOf(nType.getPaintHex()));
+		setRectangleFill(nType.getPaintHex());
 		setImage(new Image(imageLocation.toString()));
 		setTrayIcon(imageIcon.getImage());
 	}
@@ -120,7 +117,7 @@ public final class TrayNotification
 		setNotification(type);
 	}
 
-	public void setTray(final String title, final String message, final Image img, final Paint rectangleFill, final Animation animation)
+	public void setTray(final String title, final String message, final Image img, final String rectangleFill, final Animation animation)
 	{
 		setTitle(title);
 		setMessage(message);
@@ -283,14 +280,9 @@ public final class TrayNotification
 		return imageIcon.getImage();
 	}
 
-	public void setRectangleFill(final Paint value)
+	public void setRectangleFill(final String color)
 	{
-		rectangleColor.setFill(value);
-	}
-
-	public Paint getRectangleFill()
-	{
-		return rectangleColor.getFill();
+		rectangleColor.setStyle("-fx-background-color: " + color + ';');
 	}
 
 	public void setAnimation(final Animation animation)

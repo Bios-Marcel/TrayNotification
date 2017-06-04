@@ -2,7 +2,7 @@ package com.github.plushaze.traynotification.models;
 
 import javafx.beans.property.SimpleDoubleProperty;
 import javafx.geometry.Rectangle2D;
-import javafx.scene.layout.AnchorPane;
+import javafx.scene.layout.Pane;
 import javafx.stage.Screen;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
@@ -12,7 +12,7 @@ public class CustomStage extends Stage
 
 	private final Location bottomRight;
 
-	public CustomStage(final AnchorPane ap, final StageStyle style)
+	public CustomStage(final Pane ap, final StageStyle style)
 	{
 		initStyle(style);
 
