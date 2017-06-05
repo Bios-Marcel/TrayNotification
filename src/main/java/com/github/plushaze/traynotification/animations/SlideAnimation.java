@@ -62,7 +62,7 @@ final class SlideAnimation extends AbstractAnimation
 
 		// Change the opacity level to 0.4 over the duration of 2000 millis
 		final KeyValue kvOpacity = new KeyValue(stage.opacityProperty(), 0.4);
-		final KeyFrame frame2 = new KeyFrame(Duration.millis(2000), kvOpacity);
+		final KeyFrame frame2 = new KeyFrame(Duration.millis(1400), kvOpacity);
 
 		tl.getKeyFrames().addAll(frame1, frame2);
 
