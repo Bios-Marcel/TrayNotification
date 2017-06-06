@@ -9,6 +9,8 @@ import com.github.plushaze.traynotification.animations.Animations;
 import com.github.plushaze.traynotification.models.CustomStage;
 
 import javafx.application.Platform;
+import javafx.beans.property.ObjectProperty;
+import javafx.beans.property.SimpleObjectProperty;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
@@ -17,6 +19,7 @@ import javafx.scene.Scene;
 import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.Pane;
 import javafx.stage.StageStyle;
 import javafx.util.Duration;
@@ -81,6 +84,23 @@ public final class TrayNotification
 		setAnimation(Animations.FADE); // Default animation type
 	}
 
+	ObjectProperty<EventHandler<MouseEvent>> onMouseClicked = new SimpleObjectProperty<>();
+
+	public final ObjectProperty<EventHandler<MouseEvent>> onMouseClickedProperty()
+	{
+		return onMouseClicked;
+	}
+
+	public final void setOnMouseClicked(final EventHandler<MouseEvent> value)
+	{
+		onMouseClickedProperty().set(value);
+	}
+
+	public final EventHandler<MouseEvent> getOnMouseClicked()
+	{
+		return onMouseClickedProperty().get();
+	}
+
 	private void initStage(final String styleSheetLocation)
 	{
 		stage = new CustomStage(trayNotificationRootNode, StageStyle.UNDECORATED);
@@ -93,6 +113,11 @@ public final class TrayNotification
 		}
 
 		lblClose.setOnMouseClicked(e -> dismiss());
+
+		rectangleColor.onMouseClickedProperty().bind(onMouseClicked);
+		lblTitle.onMouseClickedProperty().bind(onMouseClicked);
+		lblMessage.onMouseClickedProperty().bind(onMouseClicked);
+		imageIcon.onMouseClickedProperty().bind(onMouseClicked);
 	}
 
 	public void setNotification(final Notification nType)
