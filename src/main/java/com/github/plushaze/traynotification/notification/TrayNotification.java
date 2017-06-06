@@ -31,7 +31,7 @@ public final class TrayNotification
 	@FXML
 	private Pane		rectangleColor;
 	@FXML
-	private Pane		rootNode;
+	private Pane		trayNotificationRootNode;
 
 	private CustomStage					stage;
 	private Notification				notification;
@@ -83,8 +83,8 @@ public final class TrayNotification
 
 	private void initStage(final String styleSheetLocation)
 	{
-		stage = new CustomStage(rootNode, StageStyle.UNDECORATED);
-		stage.setScene(new Scene(rootNode));
+		stage = new CustomStage(trayNotificationRootNode, StageStyle.UNDECORATED);
+		stage.setScene(new Scene(trayNotificationRootNode));
 		stage.setAlwaysOnTop(true);
 		stage.setLocation(stage.getBottomRight());
 		if (Objects.nonNull(styleSheetLocation))
