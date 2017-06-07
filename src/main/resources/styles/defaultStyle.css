@@ -1,5 +1,6 @@
 #trayNotificationCloseButton
 {
+	-fx-padding: 0;
 	-fx-border-width: 0;
 	-fx-background-color: transparent;
 	-fx-border-radius: 0;
@@ -20,4 +21,13 @@
 #rectangleColor
 {
 	-fx-background-color: gray;
+}
+
+#imageIcon
+{
+    -size: 60;
+    -fx-min-height: -size;
+    -fx-min-width: -size;
+    -fx-max-height: -size;
+    -fx-max-width: -size;
 }

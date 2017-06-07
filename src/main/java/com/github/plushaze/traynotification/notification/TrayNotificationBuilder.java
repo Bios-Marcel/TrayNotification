@@ -2,12 +2,15 @@ package com.github.plushaze.traynotification.notification;
 
 import java.util.Objects;
 
+import javafx.stage.Stage;
+
 public class TrayNotificationBuilder
 {
 	private String			title	= "";
 	private String			message	= "";
 	private String			stylesheetLocation;
 	private Notification	type	= Notifications.INFORMATION;
+	private Stage			owner	= null;
 
 	/**
 	 * Sets the title.
@@ -32,6 +35,20 @@ public class TrayNotificationBuilder
 	public TrayNotificationBuilder message(final String messageToSet)
 	{
 		message = elseGet(messageToSet, "");
+		return this;
+	}
+
+	/**
+	 * Sets the Stage that owns this TrayNotification, this will cause the TrayNotification to apply
+	 * the owner stages icons.
+	 *
+	 * @param ownerToSet
+	 *            stage that owns this TrayNotification (default is null)
+	 * @return own {@link TrayNotificationBuilder} instance
+	 */
+	public TrayNotificationBuilder owner(final Stage ownerToSet)
+	{
+		this.owner = ownerToSet;
 		return this;
 	}
 
@@ -63,7 +80,7 @@ public class TrayNotificationBuilder
 
 	public TrayNotification build()
 	{
-		final TrayNotification newTrayNotification = new TrayNotification(title, message, type, stylesheetLocation);
+		final TrayNotification newTrayNotification = new TrayNotification(owner, title, message, type, stylesheetLocation);
 		return newTrayNotification;
 	}
 
