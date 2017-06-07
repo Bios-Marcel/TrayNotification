@@ -1,15 +1,29 @@
-#trayNotificationCloseButton
-{
+#trayNotificationCloseButton {
 	-fx-padding: 0;
 	-fx-border-width: 0;
-	-fx-background-color: transparent;
 	-fx-border-radius: 0;
 	-fx-background-radius: 0;
+
+    -fx-content-display: graphic-only;
+    
+    -fx-background-color: transparent;
 }
-#trayNotificationCloseButton:hover
-{
+
+#trayNotificationCloseButton:hover {
 	-fx-background-color: rgb(232, 17, 35) !important;
-	-fx-text-fill: white !important;
+}
+
+#trayNotificationCloseButton #icon
+{
+	-fx-background-color: black;
+	
+	-size: 12;
+    -fx-min-height: -size;
+    -fx-min-width: -size;
+    -fx-max-height: -size;
+    -fx-max-width: -size;
+    
+	-fx-shape: "M19 6.41L17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z";
 }
 
 #trayNotificationRootNode
