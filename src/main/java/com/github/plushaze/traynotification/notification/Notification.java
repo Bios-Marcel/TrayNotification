@@ -4,7 +4,6 @@ import java.util.Optional;
 
 public interface Notification
 {
-
 	String getSVG();
 
 	String getPaintHex();

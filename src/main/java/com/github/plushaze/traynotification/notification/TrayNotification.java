@@ -17,12 +17,12 @@ import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
-import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.Region;
+import javafx.scene.layout.StackPane;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
 import javafx.util.Duration;
@@ -37,12 +37,12 @@ public final class TrayNotification
 	@FXML
 	private Region	imageIcon;
 	@FXML
-	private Label	lblTitle;
+	private Label	titleLabel;
 	@FXML
-	private Label	lblMessage;
+	private Label	messageLabel;
 
 	@FXML
-	private Button trayNotificationCloseButton;
+	private StackPane trayNotificationCloseButton;
 
 	private CustomStage					stage;
 	private Notification				notification;
@@ -61,7 +61,7 @@ public final class TrayNotification
 	 * @param styleSheetLocation
 	 *            Path of the Stylesheet that should be used
 	 */
-	public TrayNotification(final Stage owner, final String title, final String body, final Notification notification, final String styleSheetLocation)
+	TrayNotification(final Stage owner, final String title, final String body, final Notification notification, final String styleSheetLocation)
 	{
 		initTrayNotification(owner, title, body, notification, styleSheetLocation);
 	}
@@ -129,8 +129,8 @@ public final class TrayNotification
 		trayNotificationCloseButton.setOnMouseClicked(e -> dismiss());
 
 		rectangleColor.onMouseClickedProperty().bind(onMouseClicked);
-		lblTitle.onMouseClickedProperty().bind(onMouseClicked);
-		lblMessage.onMouseClickedProperty().bind(onMouseClicked);
+		titleLabel.onMouseClickedProperty().bind(onMouseClicked);
+		messageLabel.onMouseClickedProperty().bind(onMouseClicked);
 		imageIcon.onMouseClickedProperty().bind(onMouseClicked);
 	}
 
@@ -282,12 +282,12 @@ public final class TrayNotification
 	 */
 	public void setTitle(final String txt)
 	{
-		Platform.runLater(() -> lblTitle.setText(txt));
+		Platform.runLater(() -> titleLabel.setText(txt));
 	}
 
 	public String getTitle()
 	{
-		return lblTitle.getText();
+		return titleLabel.getText();
 	}
 
 	/**
@@ -298,12 +298,12 @@ public final class TrayNotification
 	 */
 	public void setMessage(final String txt)
 	{
-		lblMessage.setText(txt);
+		messageLabel.setText(txt);
 	}
 
 	public String getMessage()
 	{
-		return lblMessage.getText();
+		return messageLabel.getText();
 	}
 
 	public void setImage(final String svg, final String imageColor)

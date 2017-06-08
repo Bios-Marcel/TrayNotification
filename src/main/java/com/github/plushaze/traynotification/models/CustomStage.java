@@ -1,6 +1,7 @@
 package com.github.plushaze.traynotification.models;
 
 import javafx.beans.property.SimpleDoubleProperty;
+import javafx.geometry.Point2D;
 import javafx.geometry.Rectangle2D;
 import javafx.scene.layout.Pane;
 import javafx.stage.Screen;
@@ -10,7 +11,7 @@ import javafx.stage.StageStyle;
 public class CustomStage extends Stage
 {
 
-	private final Location bottomRight;
+	private final Point2D bottomRight;
 
 	public CustomStage(final Pane ap, final StageStyle style)
 	{
@@ -22,10 +23,10 @@ public class CustomStage extends Stage
 		final double x = screenBounds.getMinX() + screenBounds.getWidth() - ap.getPrefWidth() - 2;
 		final double y = screenBounds.getMinY() + screenBounds.getHeight() - ap.getPrefHeight() - 2;
 
-		bottomRight = Location.at(x, y);
+		bottomRight = new Point2D(x, y);
 	}
 
-	public Location getBottomRight()
+	public Point2D getBottomRight()
 	{
 		return bottomRight;
 	}
@@ -36,14 +37,14 @@ public class CustomStage extends Stage
 		setHeight(height);
 	}
 
-	public Location getOffScreenBounds()
+	public Point2D getOffScreenBounds()
 	{
-		final Location loc = getBottomRight();
+		final Point2D loc = getBottomRight();
 
-		return Location.at(loc.getX() + this.getWidth(), loc.getY());
+		return new Point2D(loc.getX() + this.getWidth(), loc.getY());
 	}
 
-	public void setLocation(final Location loc)
+	public void setLocation(final Point2D loc)
 	{
 		setX(loc.getX());
 		setY(loc.getY());
