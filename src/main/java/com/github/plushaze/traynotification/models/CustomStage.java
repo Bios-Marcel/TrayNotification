@@ -1,5 +1,6 @@
 package com.github.plushaze.traynotification.models;
 
+import javafx.beans.property.DoubleProperty;
 import javafx.beans.property.SimpleDoubleProperty;
 import javafx.geometry.Point2D;
 import javafx.geometry.Rectangle2D;
@@ -46,11 +47,14 @@ public class CustomStage extends Stage
 
 	public void setLocation(final Point2D loc)
 	{
-		setX(loc.getX());
-		setY(loc.getY());
+		xLocationProperty.set(loc.getX());
+		yLocationProperty.set(loc.getY());
 	}
 
-	private final SimpleDoubleProperty xLocationProperty = new SimpleDoubleProperty() {
+	/**
+	 * <code>x</code> Location Property for the overlaying {@link Stage}.
+	 */
+	private final DoubleProperty xLocationProperty = new SimpleDoubleProperty() {
 		@Override
 		public void set(final double newValue)
 		{
@@ -64,12 +68,10 @@ public class CustomStage extends Stage
 		}
 	};
 
-	public SimpleDoubleProperty xLocationProperty()
-	{
-		return xLocationProperty;
-	}
-
-	private final SimpleDoubleProperty yLocationProperty = new SimpleDoubleProperty() {
+	/**
+	 * <code>y</code> Location Property for the overlaying {@link Stage}.
+	 */
+	private final DoubleProperty yLocationProperty = new SimpleDoubleProperty() {
 		@Override
 		public void set(final double newValue)
 		{
@@ -83,7 +85,12 @@ public class CustomStage extends Stage
 		}
 	};
 
-	public SimpleDoubleProperty yLocationProperty()
+	public DoubleProperty xLocationProperty()
+	{
+		return xLocationProperty;
+	}
+
+	public DoubleProperty yLocationProperty()
 	{
 		return yLocationProperty;
 	}

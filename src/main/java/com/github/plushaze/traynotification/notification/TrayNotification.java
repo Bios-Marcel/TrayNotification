@@ -69,19 +69,18 @@ public final class TrayNotification
 	private void initTrayNotification(final Stage owner, final String title, final String message, final Notification type, final String styleSheetLocation)
 	{
 		final FXMLLoader fxmlLoader = new FXMLLoader(getClass().getClassLoader().getResource("views/TrayNotification.fxml"));
-
 		fxmlLoader.setController(this);
+
 		try
 		{
 			fxmlLoader.load();
 		}
-		catch (final IOException e)
-		{
-			e.printStackTrace();
-			return;
+		catch (final IOException cantLoadFXML)
+		{// if this occurs, there is something fundamentally wrong with this library.
+			throw new RuntimeException("Unexpected Exception", cantLoadFXML);
 		}
 
-		initStage(owner == null ? FXCollections.emptyObservableList() : owner.getIcons(), styleSheetLocation);
+		initStage(Objects.isNull(owner) ? FXCollections.emptyObservableList() : owner.getIcons(), styleSheetLocation);
 		initAnimations();
 
 		setTitle(title);
@@ -146,6 +145,7 @@ public final class TrayNotification
 
 		Integer width = null;
 		Integer height = null;
+
 		if (nType.getCustomWidth().isPresent())
 		{
 			width = nType.getCustomWidth().get();
@@ -154,9 +154,12 @@ public final class TrayNotification
 		{
 			height = nType.getCustomHeight().get();
 		}
-		setImage(nType.getSVG(), nType.getPaintHex(), width != null && width >= 1 ? width : null, height != null && height >= 1 ? height : null);
+
+		width = Objects.nonNull(width) && width >= 1 ? width : null;
+		height = Objects.nonNull(height) && height >= 1 ? height : null;
+
+		setImage(nType.getSVG(), nType.getPaintHex(), width, height);
 		setRectangleFill(nType.getPaintHex());
-		// setTrayIcon(imageIcon.getImage());
 	}
 
 	public Notification getNotification()
@@ -258,23 +261,6 @@ public final class TrayNotification
 	}
 
 	/**
-	 * Sets a new task bar image for the tray
-	 *
-	 * @param img
-	 *            The image to assign
-	 */
-	public void setTrayIcon(final Image img)
-	{
-		stage.getIcons().clear();
-		stage.getIcons().add(img);
-	}
-
-	public Image getTrayIcon()
-	{
-		return stage.getIcons().get(0);
-	}
-
-	/**
 	 * Sets a title to the tray
 	 *
 	 * @param txt
@@ -306,22 +292,22 @@ public final class TrayNotification
 		return messageLabel.getText();
 	}
 
-	public void setImage(final String svg, final String imageColor)
+	void setImage(final String svg, final String imageColor)
 	{
 		setImage(svg, imageColor, null, null);
 	}
 
-	public void setImageWithWidth(final String svg, final String imageColor, final Integer width)
+	void setImageWithWidth(final String svg, final String imageColor, final Integer width)
 	{
 		setImage(svg, imageColor, width, null);
 	}
 
-	public void setImageWithHeight(final String svg, final String imageColor, final Integer height)
+	void setImageWithHeight(final String svg, final String imageColor, final Integer height)
 	{
 		setImage(svg, imageColor, null, height);
 	}
 
-	public void setImage(final String svg, final String imageColor, final Integer width, final Integer height)
+	void setImage(final String svg, final String imageColor, final Integer width, final Integer height)
 	{
 		final StringBuilder style = new StringBuilder();
 		if (width != null)
@@ -340,11 +326,6 @@ public final class TrayNotification
 	{
 		imageIcon.setStyle(style);
 	}
-
-	// public Image getImage()
-	// {
-	// return imageIcon.getImage();
-	// }
 
 	public void setRectangleFill(final String color)
 	{

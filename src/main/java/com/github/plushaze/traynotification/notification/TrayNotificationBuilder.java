@@ -2,6 +2,9 @@ package com.github.plushaze.traynotification.notification;
 
 import java.util.Objects;
 
+import com.github.plushaze.traynotification.animations.Animation;
+import com.github.plushaze.traynotification.animations.Animations;
+
 import javafx.stage.Stage;
 
 public class TrayNotificationBuilder
@@ -11,6 +14,9 @@ public class TrayNotificationBuilder
 	private String			stylesheetLocation;
 	private Notification	type	= Notifications.INFORMATION;
 	private Stage			owner	= null;
+
+	private Animations	animations	= Animations.NONE;
+	private Animation	animation	= null;
 
 	/**
 	 * Sets the title.
@@ -78,9 +84,43 @@ public class TrayNotificationBuilder
 		return this;
 	}
 
+	/**
+	 * Sets the Animation for the {@link TrayNotification} object that will be created.
+	 *
+	 * @param animationsToSet
+	 *            the {@link Animations ANimation} that is to set
+	 * @return own {@link TrayNotificationBuilder} instance
+	 */
+	public TrayNotificationBuilder animation(final Animations animationsToSet)
+	{
+		animations = elseGet(animationsToSet, Animations.NONE);
+		return this;
+	}
+
+	/**
+	 * Sets the Animation for the {@link TrayNotification} object that will be created.
+	 *
+	 * @param animationsToSet
+	 *            the {@link Animation ANimation} that is to set
+	 * @return own {@link TrayNotificationBuilder} instance
+	 */
+	public TrayNotificationBuilder animation(final Animation animationToSet)
+	{
+		animation = animationToSet;
+		return this;
+	}
+
 	public TrayNotification build()
 	{
 		final TrayNotification newTrayNotification = new TrayNotification(owner, title, message, type, stylesheetLocation);
+		if (Objects.nonNull(animation))
+		{
+			newTrayNotification.setAnimation(animation);
+		}
+		else if (Objects.nonNull(animations))
+		{
+			newTrayNotification.setAnimation(animations);
+		}
 		return newTrayNotification;
 	}
 
