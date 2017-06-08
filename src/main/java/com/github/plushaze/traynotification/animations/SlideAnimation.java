@@ -27,9 +27,9 @@ final class SlideAnimation extends AbstractAnimation
 		final KeyFrame frame1 = new KeyFrame(Duration.ZERO, kvX);
 
 		// Animates the Tray onto the screen and interpolates at a tangent for 300 millis
-		final Interpolator interpolator = Interpolator.TANGENT(Duration.millis(300), 50);
+		final Interpolator interpolator = Interpolator.TANGENT(Duration.millis(500), 50);
 		final KeyValue kvInter = new KeyValue(stage.xLocationProperty(), stage.getBottomRight().getX(), interpolator);
-		final KeyFrame frame2 = new KeyFrame(Duration.millis(1300), kvInter);
+		final KeyFrame frame2 = new KeyFrame(Duration.millis(500), kvInter);
 
 		// Sets opacity to 0 instantly
 		final KeyValue kvOpacity = new KeyValue(stage.opacityProperty(), 0.0);
@@ -37,7 +37,7 @@ final class SlideAnimation extends AbstractAnimation
 
 		// Increases the opacity to fully visible whilst moving in the space of 1000 millis
 		final KeyValue kvOpacity2 = new KeyValue(stage.opacityProperty(), 1.0);
-		final KeyFrame frame4 = new KeyFrame(Duration.millis(1000), kvOpacity2);
+		final KeyFrame frame4 = new KeyFrame(Duration.millis(500), kvOpacity2);
 
 		tl.getKeyFrames().addAll(frame1, frame2, frame3, frame4);
 
@@ -58,11 +58,11 @@ final class SlideAnimation extends AbstractAnimation
 		// The destination X location for the stage. Which is off the users screen
 		// Since the tray has some padding, we want to hide that too
 		final KeyValue kvX = new KeyValue(stage.xLocationProperty(), offScreenX + trayPadding, interpolator);
-		final KeyFrame frame1 = new KeyFrame(Duration.millis(1400), kvX);
+		final KeyFrame frame1 = new KeyFrame(Duration.millis(300), kvX);
 
 		// Change the opacity level to 0.4 over the duration of 2000 millis
 		final KeyValue kvOpacity = new KeyValue(stage.opacityProperty(), 0.4);
-		final KeyFrame frame2 = new KeyFrame(Duration.millis(1400), kvOpacity);
+		final KeyFrame frame2 = new KeyFrame(Duration.millis(200), kvOpacity);
 
 		tl.getKeyFrames().addAll(frame1, frame2);
 

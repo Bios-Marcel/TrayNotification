@@ -8,11 +8,11 @@ import javafx.util.Duration;
 
 public abstract class AbstractAnimation implements Animation
 {
-
 	protected final CustomStage stage;
 
-	protected final Timeline				showAnimation, dismissAnimation;
-	protected final SequentialTransition	sq;
+	private final Timeline				showAnimation;
+	private final Timeline				dismissAnimation;
+	private final SequentialTransition	sq;
 
 	protected volatile boolean trayIsShowing;
 

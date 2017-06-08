@@ -18,48 +18,48 @@ final class PopupAnimation extends AbstractAnimation
 	@Override
 	protected Timeline setupDismissAnimation()
 	{
-		final Timeline tl = new Timeline();
+		final Timeline timeline = new Timeline();
 
-		final KeyValue kv1 = new KeyValue(stage.yLocationProperty(), stage.getY() + stage.getWidth());
-		final KeyFrame kf1 = new KeyFrame(Duration.millis(1000), kv1);
+		final KeyValue keyValueLocation = new KeyValue(stage.yLocationProperty(), stage.getY() + stage.getWidth());
+		final KeyFrame keyFrameLocation = new KeyFrame(Duration.millis(1000), keyValueLocation);
 
-		final KeyValue kv2 = new KeyValue(stage.opacityProperty(), 0.0);
-		final KeyFrame kf2 = new KeyFrame(Duration.millis(1000), kv2);
+		final KeyValue keyValueOpacity = new KeyValue(stage.opacityProperty(), 0.0);
+		final KeyFrame keyFrameOpacity = new KeyFrame(Duration.millis(300), keyValueOpacity);
 
-		tl.getKeyFrames().addAll(kf1, kf2);
+		timeline.getKeyFrames().addAll(keyFrameLocation, keyFrameOpacity);
 
-		tl.setOnFinished(e ->
+		timeline.setOnFinished(e ->
 		{
 			trayIsShowing = false;
 			stage.close();
 			stage.setLocation(stage.getBottomRight());
 		});
 
-		return tl;
+		return timeline;
 	}
 
 	@Override
 	protected Timeline setupShowAnimation()
 	{
-		final Timeline tl = new Timeline();
+		final Timeline timeline = new Timeline();
 
-		final KeyValue kv1 = new KeyValue(stage.yLocationProperty(), stage.getBottomRight().getY() + stage.getWidth());
-		final KeyFrame kf1 = new KeyFrame(Duration.ZERO, kv1);
+		final KeyValue keyValuePositionInitial = new KeyValue(stage.yLocationProperty(), stage.getBottomRight().getY() + stage.getWidth());
+		final KeyFrame keyFramePositionInitial = new KeyFrame(Duration.ZERO, keyValuePositionInitial);
 
-		final KeyValue kv2 = new KeyValue(stage.yLocationProperty(), stage.getBottomRight().getY());
-		final KeyFrame kf2 = new KeyFrame(Duration.millis(1000), kv2);
+		final KeyValue keyValuePositionFinal = new KeyValue(stage.yLocationProperty(), stage.getBottomRight().getY());
+		final KeyFrame keyFramePositionFinal = new KeyFrame(Duration.millis(600), keyValuePositionFinal);
 
-		final KeyValue kv3 = new KeyValue(stage.opacityProperty(), 0.0);
-		final KeyFrame kf3 = new KeyFrame(Duration.ZERO, kv3);
+		final KeyValue keyValueOpacityZero = new KeyValue(stage.opacityProperty(), 0.0);
+		final KeyFrame keyFrameOpacityZero = new KeyFrame(Duration.ZERO, keyValueOpacityZero);
 
-		final KeyValue kv4 = new KeyValue(stage.opacityProperty(), 1.0);
-		final KeyFrame kf4 = new KeyFrame(Duration.millis(1000), kv4);
+		final KeyValue keyValueOpacityOne = new KeyValue(stage.opacityProperty(), 1.0);
+		final KeyFrame keyFrameOpacityOne = new KeyFrame(Duration.millis(750), keyValueOpacityOne);
 
-		tl.getKeyFrames().addAll(kf1, kf2, kf3, kf4);
+		timeline.getKeyFrames().addAll(keyFramePositionInitial, keyFramePositionFinal, keyFrameOpacityZero, keyFrameOpacityOne);
 
-		tl.setOnFinished(e -> trayIsShowing = true);
+		timeline.setOnFinished(e -> trayIsShowing = true);
 
-		return tl;
+		return timeline;
 	}
 
 }

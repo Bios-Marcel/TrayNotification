@@ -20,26 +20,28 @@ final class NoneAnimation extends AbstractAnimation
 	@Override
 	protected Timeline setupShowAnimation()
 	{
-		final Timeline tl = new Timeline();
+		// Left empty, since there should be no animations
+		final Timeline timeline = new Timeline();
 
-		tl.setOnFinished(e -> trayIsShowing = true);
+		timeline.setOnFinished(e -> trayIsShowing = true);
 
-		return tl;
+		return timeline;
 	}
 
 	@Override
 	protected Timeline setupDismissAnimation()
 	{
-		final Timeline tl = new Timeline();
+		// Left empty, since there should be no animations
+		final Timeline timeline = new Timeline();
 
-		tl.setOnFinished(e ->
+		timeline.setOnFinished(e ->
 		{
 			trayIsShowing = false;
 			stage.close();
 			stage.setLocation(stage.getBottomRight());
 		});
 
-		return tl;
+		return timeline;
 	}
 
 }
