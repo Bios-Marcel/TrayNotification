@@ -9,6 +9,8 @@ import javafx.stage.Stage;
 
 public class TrayNotificationBuilder
 {
+	private static String defaultStylesheet;
+
 	private String			title	= "";
 	private String			message	= "";
 	private String			stylesheetLocation;
@@ -17,6 +19,17 @@ public class TrayNotificationBuilder
 
 	private Animations	animations	= Animations.NONE;
 	private Animation	animation	= null;
+
+	/**
+	 * Sets the default stylesheet location that will be used if no other has been specified.
+	 *
+	 * @param stylesheet
+	 *            the path for the default stylesheet
+	 */
+	public static void setDefaultStylesheet(final String stylesheet)
+	{
+		defaultStylesheet = stylesheet;
+	}
 
 	/**
 	 * Sets the title.
@@ -110,9 +123,12 @@ public class TrayNotificationBuilder
 		return this;
 	}
 
+	/**
+	 * @return Returns the built {@link TrayNotification}
+	 */
 	public TrayNotification build()
 	{
-		final TrayNotification newTrayNotification = new TrayNotification(owner, title, message, type, stylesheetLocation);
+		final TrayNotification newTrayNotification = new TrayNotification(owner, title, message, type, elseGet(stylesheetLocation, defaultStylesheet));
 		if (Objects.nonNull(animation))
 		{
 			newTrayNotification.setAnimation(animation);
