@@ -14,13 +14,14 @@ import javafx.stage.Stage;
  */
 public class TrayNotificationBuilder
 {
-	private static String defaultStylesheet;
+	private static String	defaultStylesheet;
+	private static Stage	defaultOwner;
 
-	private String			title	= "";
-	private String			message	= "";
-	private String			stylesheetLocation;
+	private String				title	= "";
+	private String				message	= "";
+	private String				stylesheetLocation;
 	private NotificationType	type	= NotificationTypeImplementations.INFORMATION;
-	private Stage			owner	= null;
+	private Stage				owner	= null;
 
 	private Animations	animations	= Animations.NONE;
 	private Animation	animation	= null;
@@ -34,6 +35,18 @@ public class TrayNotificationBuilder
 	public static void setDefaultStylesheet(final String stylesheet)
 	{
 		defaultStylesheet = stylesheet;
+	}
+
+	/**
+	 * Sets the default owner stage for every created {@link TrayNotification} in this applications
+	 * context.
+	 *
+	 * @param defaultOwnerStage
+	 *            the Stage to set as the default owner
+	 */
+	public static void setDefaultOwner(final Stage defaultOwnerStage)
+	{
+		defaultOwner = defaultOwnerStage;
 	}
 
 	/**
@@ -133,7 +146,7 @@ public class TrayNotificationBuilder
 	 */
 	public TrayNotification build()
 	{
-		final TrayNotification newTrayNotification = new TrayNotification(owner, title, message, type, elseGet(stylesheetLocation, defaultStylesheet));
+		final TrayNotification newTrayNotification = new TrayNotification(elseGet(owner, defaultOwner), title, message, type, elseGet(stylesheetLocation, defaultStylesheet));
 		if (Objects.nonNull(animation))
 		{
 			newTrayNotification.setAnimation(animation);
