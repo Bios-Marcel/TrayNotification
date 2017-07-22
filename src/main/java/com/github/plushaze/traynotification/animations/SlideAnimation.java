@@ -69,7 +69,7 @@ final class SlideAnimation extends AbstractAnimation
 		tl.setOnFinished(e ->
 		{
 			trayIsShowing = false;
-			stage.close();
+			stage.hide();
 			stage.setLocation(stage.getBottomRight());
 		});
 

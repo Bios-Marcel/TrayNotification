@@ -5,19 +5,18 @@ import javafx.beans.property.SimpleDoubleProperty;
 import javafx.geometry.Point2D;
 import javafx.geometry.Rectangle2D;
 import javafx.scene.layout.Pane;
+import javafx.stage.Popup;
 import javafx.stage.Screen;
 import javafx.stage.Stage;
-import javafx.stage.StageStyle;
 
-public class CustomStage extends Stage
+public class CustomStage extends Popup
 {
 
 	private final Point2D bottomRight;
 
-	public CustomStage(final Pane ap, final StageStyle style)
+	public CustomStage(final Pane ap)
 	{
-		initStyle(style);
-
+		getContent().add(ap);
 		setSize(ap.getPrefWidth(), ap.getPrefHeight());
 
 		final Rectangle2D screenBounds = Screen.getPrimary().getVisualBounds();
@@ -27,22 +26,22 @@ public class CustomStage extends Stage
 		bottomRight = new Point2D(x, y);
 	}
 
-	public Point2D getBottomRight()
-	{
-		return bottomRight;
-	}
-
 	public void setSize(final double width, final double height)
 	{
 		setWidth(width);
 		setHeight(height);
 	}
 
+	public Point2D getBottomRight()
+	{
+		return bottomRight;
+	}
+
 	public Point2D getOffScreenBounds()
 	{
 		final Point2D loc = getBottomRight();
 
-		return new Point2D(loc.getX() + this.getWidth(), loc.getY());
+		return new Point2D(loc.getX() + getWidth(), loc.getY());
 	}
 
 	public void setLocation(final Point2D loc)

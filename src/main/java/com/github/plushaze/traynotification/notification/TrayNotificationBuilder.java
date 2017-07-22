@@ -7,6 +7,11 @@ import com.github.plushaze.traynotification.animations.Animations;
 
 import javafx.stage.Stage;
 
+/**
+ * Helps creating {@link TrayNotification TrayNotifications}.
+ *
+ * @author Marcel
+ */
 public class TrayNotificationBuilder
 {
 	private static String defaultStylesheet;
@@ -14,7 +19,7 @@ public class TrayNotificationBuilder
 	private String			title	= "";
 	private String			message	= "";
 	private String			stylesheetLocation;
-	private Notification	type	= Notifications.INFORMATION;
+	private NotificationType	type	= NotificationTypeImplementations.INFORMATION;
 	private Stage			owner	= null;
 
 	private Animations	animations	= Animations.NONE;
@@ -75,12 +80,12 @@ public class TrayNotificationBuilder
 	 * Sets the Notification (type).
 	 *
 	 * @param typeToSet
-	 *            type to be set (default is {@link Notifications#INFORMATION})
+	 *            type to be set (default is {@link NotificationTypeImplementations#INFORMATION})
 	 * @return own {@link TrayNotificationBuilder} instance
 	 */
-	public TrayNotificationBuilder type(final Notification typeToSet)
+	public TrayNotificationBuilder type(final NotificationType typeToSet)
 	{
-		type = elseGet(typeToSet, Notifications.INFORMATION);
+		type = elseGet(typeToSet, NotificationTypeImplementations.INFORMATION);
 		return this;
 	}
 
@@ -113,7 +118,7 @@ public class TrayNotificationBuilder
 	/**
 	 * Sets the Animation for the {@link TrayNotification} object that will be created.
 	 *
-	 * @param animationsToSet
+	 * @param animationToSet
 	 *            the {@link Animation ANimation} that is to set
 	 * @return own {@link TrayNotificationBuilder} instance
 	 */

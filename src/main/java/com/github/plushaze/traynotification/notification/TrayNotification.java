@@ -10,27 +10,23 @@ import com.github.plushaze.traynotification.models.CustomStage;
 import javafx.application.Platform;
 import javafx.beans.property.ObjectProperty;
 import javafx.beans.property.SimpleObjectProperty;
-import javafx.collections.FXCollections;
-import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
-import javafx.scene.Scene;
 import javafx.scene.control.Label;
-import javafx.scene.image.Image;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.Region;
 import javafx.scene.layout.StackPane;
 import javafx.stage.Stage;
-import javafx.stage.StageStyle;
 import javafx.util.Duration;
 
 public final class TrayNotification
 {
+	private Stage	ownerStage;
 	@FXML
-	private Pane trayNotificationRootNode;
+	private Pane	trayNotificationRootNode;
 
 	@FXML
 	private Pane	rectangleColor;
@@ -45,7 +41,7 @@ public final class TrayNotification
 	private StackPane trayNotificationCloseButton;
 
 	private CustomStage					stage;
-	private Notification				notification;
+	private NotificationType			notification;
 	private Animation					animation;
 	private EventHandler<ActionEvent>	onDismissedCallBack, onShownCallback;
 
@@ -61,13 +57,14 @@ public final class TrayNotification
 	 * @param styleSheetLocation
 	 *            Path of the Stylesheet that should be used
 	 */
-	TrayNotification(final Stage owner, final String title, final String body, final Notification notification, final String styleSheetLocation)
+	TrayNotification(final Stage owner, final String title, final String body, final NotificationType notification, final String styleSheetLocation)
 	{
 		initTrayNotification(owner, title, body, notification, styleSheetLocation);
 	}
 
-	private void initTrayNotification(final Stage owner, final String title, final String message, final Notification type, final String styleSheetLocation)
+	private void initTrayNotification(final Stage owner, final String title, final String message, final NotificationType type, final String styleSheetLocation)
 	{
+		ownerStage = owner;
 		final FXMLLoader fxmlLoader = new FXMLLoader(getClass().getClassLoader().getResource("views/TrayNotification.fxml"));
 		fxmlLoader.setController(this);
 
@@ -80,7 +77,7 @@ public final class TrayNotification
 			throw new RuntimeException("Unexpected Exception", cantLoadFXML);
 		}
 
-		initStage(Objects.isNull(owner) ? FXCollections.emptyObservableList() : owner.getIcons(), styleSheetLocation);
+		initStage(styleSheetLocation);
 		initAnimations();
 
 		setTitle(title);
@@ -105,20 +102,20 @@ public final class TrayNotification
 		onMouseClickedProperty().set(value);
 	}
 
+	/**
+	 * @return the {@link EventHandler} that will be executed if the {@link TrayNotification} is
+	 *         clicked
+	 */
 	public final EventHandler<MouseEvent> getOnMouseClicked()
 	{
 		return onMouseClickedProperty().get();
 	}
 
-	private void initStage(final ObservableList<Image> icons, final String styleSheetLocation)
+	private void initStage(final String styleSheetLocation)
 	{
-		stage = new CustomStage(trayNotificationRootNode, StageStyle.UNDECORATED);
-		stage.setScene(new Scene(trayNotificationRootNode));
-		stage.setAlwaysOnTop(true);
+		stage = new CustomStage(trayNotificationRootNode);
 		stage.setLocation(stage.getBottomRight());
 		stage.getScene().getStylesheets().add(getClass().getResource("/styles/defaultStyle.css").toExternalForm());
-		stage.getIcons().clear();
-		stage.getIcons().addAll(icons);
 
 		if (Objects.nonNull(styleSheetLocation))
 		{
@@ -137,9 +134,10 @@ public final class TrayNotification
 	 * Applies the Colors and icons.
 	 *
 	 * @param nType
-	 *            The {@link Notification} Enum containing the svg, color and size info
+	 *            The {@link NotificationType} Enum containing the svg, color and size info
 	 */
-	public void setNotification(final Notification nType)
+	@SuppressWarnings("null")
+	public void setNotification(final NotificationType nType)
 	{
 		notification = nType;
 
@@ -162,11 +160,17 @@ public final class TrayNotification
 		setRectangleFill(nType.getPaintHex());
 	}
 
-	public Notification getNotification()
+	/**
+	 * @return the {@link NotificationType} used for this {@link TrayNotification}
+	 */
+	public NotificationType getNotification()
 	{
 		return notification;
 	}
 
+	/**
+	 * @return true if the tray is showing and false otherwise
+	 */
 	public boolean isTrayShowing()
 	{
 		return animation.isShowing();
@@ -182,7 +186,7 @@ public final class TrayNotification
 	{
 		if (!isTrayShowing())
 		{
-			stage.show();
+			stage.show(ownerStage);
 
 			onShown();
 			animation.playSequential(dismissDelay);
@@ -202,7 +206,7 @@ public final class TrayNotification
 	{
 		if (!isTrayShowing())
 		{
-			stage.show();
+			stage.show(ownerStage);
 
 			animation.playShowAnimation();
 
@@ -271,6 +275,9 @@ public final class TrayNotification
 		Platform.runLater(() -> titleLabel.setText(txt));
 	}
 
+	/**
+	 * @return the title that will be displayed inside of the {@link TrayNotification}
+	 */
 	public String getTitle()
 	{
 		return titleLabel.getText();
@@ -287,6 +294,9 @@ public final class TrayNotification
 		messageLabel.setText(txt);
 	}
 
+	/**
+	 * @return the Message that will be displayed inside of the {@link TrayNotification}
+	 */
 	public String getMessage()
 	{
 		return messageLabel.getText();
@@ -327,21 +337,42 @@ public final class TrayNotification
 		imageIcon.setStyle(style);
 	}
 
+	/**
+	 * Sets the color of the rectangle on the left side of the TrayNotification.
+	 *
+	 * @param color
+	 *            the color that will be set
+	 */
 	public void setRectangleFill(final String color)
 	{
 		rectangleColor.setStyle("-fx-background-color: " + color + ';');
 	}
 
+	/**
+	 * Sets the {@link Animation} that the stage will use when showing / hiding.
+	 *
+	 * @param animation
+	 *            {@link Animation} to set
+	 */
 	public void setAnimation(final Animation animation)
 	{
 		this.animation = animation;
 	}
 
+	/**
+	 * Sets the {@link Animation} that the stage will use when showing / hiding.
+	 *
+	 * @param animation
+	 *            the enum value to create a default {@link Animation} with
+	 */
 	public void setAnimation(final Animations animation)
 	{
 		setAnimation(animation.newInstance(stage));
 	}
 
+	/**
+	 * @return the animation, that this instance will use when showing / hiding
+	 */
 	public Animation getAnimation()
 	{
 		return animation;

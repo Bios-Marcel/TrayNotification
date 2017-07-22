@@ -52,7 +52,7 @@ final class FadeAnimation extends AbstractAnimation
 		timeline.setOnFinished(e ->
 		{
 			trayIsShowing = false;
-			stage.close();
+			stage.hide();
 			stage.setLocation(stage.getBottomRight());
 		});
 

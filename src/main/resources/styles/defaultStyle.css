@@ -29,7 +29,8 @@
 #trayNotificationRootNode
 {
 	-fx-border-width: 1;
-	-fx-border-color: gray;	
+	-fx-border-color: gray;
+	-fx-background-color: white;
 }
 
 #rectangleColor
