@@ -119,7 +119,7 @@ public final class TrayNotification
 
 		if (Objects.nonNull(styleSheetLocation))
 		{
-			stage.getScene().getStylesheets().add(this.getClass().getResource(styleSheetLocation).toExternalForm());
+			stage.getScene().getStylesheets().add(styleSheetLocation);
 		}
 
 		trayNotificationCloseButton.setOnMouseClicked(e -> dismiss());
