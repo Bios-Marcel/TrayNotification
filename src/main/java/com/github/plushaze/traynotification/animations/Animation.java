@@ -1,6 +1,6 @@
 package com.github.plushaze.traynotification.animations;
 
-import com.github.plushaze.traynotification.models.CustomStage;
+import com.github.plushaze.traynotification.models.TrayPopup;
 
 import javafx.util.Duration;
 
@@ -33,6 +33,6 @@ public interface Animation
 	/**
 	 * @return The custom stage of the animation
 	 */
-	CustomStage getStage();
+	TrayPopup getStage();
 
 }

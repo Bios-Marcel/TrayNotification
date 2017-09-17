@@ -5,7 +5,7 @@ import java.util.Objects;
 
 import com.github.plushaze.traynotification.animations.Animation;
 import com.github.plushaze.traynotification.animations.Animations;
-import com.github.plushaze.traynotification.models.CustomStage;
+import com.github.plushaze.traynotification.models.TrayPopup;
 
 import javafx.application.Platform;
 import javafx.beans.property.ObjectProperty;
@@ -40,10 +40,12 @@ public final class TrayNotification
 	@FXML
 	private StackPane trayNotificationCloseButton;
 
-	private CustomStage					stage;
+	private TrayPopup					stage;
 	private NotificationType			notification;
 	private Animation					animation;
 	private EventHandler<ActionEvent>	onDismissedCallBack, onShownCallback;
+
+	private final ObjectProperty<EventHandler<MouseEvent>> onMouseClicked = new SimpleObjectProperty<>();
 
 	/**
 	 * Initializes an instance of the tray notification object
@@ -57,8 +59,9 @@ public final class TrayNotification
 	 * @param styleSheetLocation
 	 *            Path of the Stylesheet that should be used
 	 */
-	TrayNotification(final Stage owner, final String title, final String body, final NotificationType notification, final String styleSheetLocation)
+	TrayNotification(final Stage owner, final String title, final String body, final NotificationType notification, final boolean darkByDefault)
 	{
+		final String styleSheetLocation = darkByDefault ? "styles/trayDark.css" : "styles/defaultStyle.css";
 		initTrayNotification(owner, title, body, notification, styleSheetLocation);
 	}
 
@@ -90,8 +93,6 @@ public final class TrayNotification
 		setAnimation(Animations.NONE); // Default animation type
 	}
 
-	ObjectProperty<EventHandler<MouseEvent>> onMouseClicked = new SimpleObjectProperty<>();
-
 	public final ObjectProperty<EventHandler<MouseEvent>> onMouseClickedProperty()
 	{
 		return onMouseClicked;
@@ -113,9 +114,8 @@ public final class TrayNotification
 
 	private void initStage(final String styleSheetLocation)
 	{
-		stage = new CustomStage(trayNotificationRootNode);
+		stage = new TrayPopup(trayNotificationRootNode);
 		stage.setLocation(stage.getBottomRight());
-		stage.getScene().getStylesheets().add(getClass().getResource("/styles/defaultStyle.css").toExternalForm());
 
 		if (Objects.nonNull(styleSheetLocation))
 		{

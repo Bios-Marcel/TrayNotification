@@ -14,27 +14,32 @@ import javafx.stage.Stage;
  */
 public class TrayNotificationBuilder
 {
-	private static String	defaultStylesheet;
 	private static Stage	defaultOwner;
+	private static boolean	darkByDefault	= false;
 
 	private String				title	= "";
 	private String				message	= "";
-	private String				stylesheetLocation;
 	private NotificationType	type	= NotificationTypeImplementations.INFORMATION;
 	private Stage				owner	= null;
+	private Boolean				dark	= darkByDefault;
 
 	private Animations	animations	= Animations.NONE;
 	private Animation	animation	= null;
 
 	/**
-	 * Sets the default stylesheet location that will be used if no other has been specified.
-	 *
-	 * @param stylesheet
-	 *            the path for the default stylesheet
+	 * Will set the default theme to dark.
 	 */
-	public static void setDefaultStylesheet(final String stylesheet)
+	public static void darkByDefault()
 	{
-		defaultStylesheet = stylesheet;
+		darkByDefault = true;
+	}
+
+	/**
+	 * Will set the default theme to light.
+	 */
+	public static void lightByDefault()
+	{
+		darkByDefault = false;
 	}
 
 	/**
@@ -103,19 +108,6 @@ public class TrayNotificationBuilder
 	}
 
 	/**
-	 * Sets the stylesheet location.
-	 *
-	 * @param stylesheetLocationToSet
-	 *            stylesheet location to be set
-	 * @return own {@link TrayNotificationBuilder} instance
-	 */
-	public TrayNotificationBuilder stylesheet(final String stylesheetLocationToSet)
-	{
-		stylesheetLocation = stylesheetLocationToSet;
-		return this;
-	}
-
-	/**
 	 * Sets the Animation for the {@link TrayNotification} object that will be created.
 	 *
 	 * @param animationsToSet
@@ -142,11 +134,25 @@ public class TrayNotificationBuilder
 	}
 
 	/**
+	 * Sets the value that will decide if the notification will be dark.
+	 *
+	 * @param darkToSet
+	 *            value to set
+	 * @return own {@link TrayNotificationBuilder} instance
+	 */
+	public TrayNotificationBuilder dark(final boolean darkToSet)
+	{
+		dark = darkToSet;
+		return this;
+	}
+
+	/**
 	 * @return Returns the built {@link TrayNotification}
 	 */
 	public TrayNotification build()
 	{
-		final TrayNotification newTrayNotification = new TrayNotification(elseGet(owner, defaultOwner), title, message, type, elseGet(stylesheetLocation, defaultStylesheet));
+		final TrayNotification newTrayNotification = new TrayNotification(elseGet(owner, defaultOwner), title, message, type, dark);
+
 		if (Objects.nonNull(animation))
 		{
 			newTrayNotification.setAnimation(animation);
@@ -155,6 +161,7 @@ public class TrayNotificationBuilder
 		{
 			newTrayNotification.setAnimation(animations);
 		}
+
 		return newTrayNotification;
 	}
 

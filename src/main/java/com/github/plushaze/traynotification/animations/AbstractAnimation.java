@@ -1,6 +1,6 @@
 package com.github.plushaze.traynotification.animations;
 
-import com.github.plushaze.traynotification.models.CustomStage;
+import com.github.plushaze.traynotification.models.TrayPopup;
 
 import javafx.animation.SequentialTransition;
 import javafx.animation.Timeline;
@@ -8,7 +8,7 @@ import javafx.util.Duration;
 
 public abstract class AbstractAnimation implements Animation
 {
-	protected final CustomStage stage;
+	protected final TrayPopup stage;
 
 	private final Timeline				showAnimation;
 	private final Timeline				dismissAnimation;
@@ -16,7 +16,7 @@ public abstract class AbstractAnimation implements Animation
 
 	protected volatile boolean trayIsShowing;
 
-	protected AbstractAnimation(final CustomStage stage)
+	protected AbstractAnimation(final TrayPopup stage)
 	{
 		this.stage = stage;
 
@@ -31,7 +31,7 @@ public abstract class AbstractAnimation implements Animation
 	protected abstract Timeline setupDismissAnimation();
 
 	@Override
-	public final CustomStage getStage()
+	public final TrayPopup getStage()
 	{
 		return stage;
 	}

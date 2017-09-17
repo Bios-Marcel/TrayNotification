@@ -9,12 +9,12 @@ import javafx.stage.Popup;
 import javafx.stage.Screen;
 import javafx.stage.Stage;
 
-public class CustomStage extends Popup
+public class TrayPopup extends Popup
 {
 
 	private final Point2D bottomRight;
 
-	public CustomStage(final Pane ap)
+	public TrayPopup(final Pane ap)
 	{
 		getContent().add(ap);
 		setSize(ap.getPrefWidth(), ap.getPrefHeight());

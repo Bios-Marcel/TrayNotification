@@ -1,6 +1,6 @@
 package com.github.plushaze.traynotification.animations;
 
-import com.github.plushaze.traynotification.models.CustomStage;
+import com.github.plushaze.traynotification.models.TrayPopup;
 
 import javafx.animation.Timeline;
 
@@ -12,7 +12,7 @@ import javafx.animation.Timeline;
  */
 final class NoneAnimation extends AbstractAnimation
 {
-	NoneAnimation(final CustomStage stage)
+	NoneAnimation(final TrayPopup stage)
 	{
 		super(stage);
 	}

@@ -1,6 +1,6 @@
 package com.github.plushaze.traynotification.animations;
 
-import com.github.plushaze.traynotification.models.CustomStage;
+import com.github.plushaze.traynotification.models.TrayPopup;
 
 import javafx.animation.Interpolator;
 import javafx.animation.KeyFrame;
@@ -11,7 +11,7 @@ import javafx.util.Duration;
 final class SlideAnimation extends AbstractAnimation
 {
 
-	SlideAnimation(final CustomStage customStage)
+	SlideAnimation(final TrayPopup customStage)
 	{
 		super(customStage);
 	}

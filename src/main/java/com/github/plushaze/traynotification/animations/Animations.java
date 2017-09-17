@@ -2,7 +2,7 @@ package com.github.plushaze.traynotification.animations;
 
 import java.util.function.Function;
 
-import com.github.plushaze.traynotification.models.CustomStage;
+import com.github.plushaze.traynotification.models.TrayPopup;
 
 public enum Animations
 {
@@ -11,14 +11,14 @@ public enum Animations
 	FADE(FadeAnimation::new),
 	POPUP(PopupAnimation::new);
 
-	private final Function<CustomStage, Animation> newInstance;
+	private final Function<TrayPopup, Animation> newInstance;
 
-	private Animations(final Function<CustomStage, Animation> newInstance)
+	private Animations(final Function<TrayPopup, Animation> newInstance)
 	{
 		this.newInstance = newInstance;
 	}
 
-	public Animation newInstance(final CustomStage stage)
+	public Animation newInstance(final TrayPopup stage)
 	{
 		return newInstance.apply(stage);
 	}

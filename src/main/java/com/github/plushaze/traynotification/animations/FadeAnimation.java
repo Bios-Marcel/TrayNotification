@@ -1,6 +1,6 @@
 package com.github.plushaze.traynotification.animations;
 
-import com.github.plushaze.traynotification.models.CustomStage;
+import com.github.plushaze.traynotification.models.TrayPopup;
 
 import javafx.animation.KeyFrame;
 import javafx.animation.KeyValue;
@@ -10,7 +10,7 @@ import javafx.util.Duration;
 final class FadeAnimation extends AbstractAnimation
 {
 
-	FadeAnimation(final CustomStage stage)
+	FadeAnimation(final TrayPopup stage)
 	{
 		super(stage);
 	}
