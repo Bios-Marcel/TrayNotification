@@ -38,7 +38,7 @@
 	-fx-background-color: gray;
 }
 
-#imageIcon
+#trayNotificationIcon
 {
     -size: 5em;
     -fx-min-height: -size;

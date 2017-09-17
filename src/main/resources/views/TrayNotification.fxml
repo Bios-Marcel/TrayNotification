@@ -7,23 +7,25 @@
 <?import javafx.scene.layout.StackPane?>
 <?import javafx.scene.layout.VBox?>
 
-<HBox fx:id="trayNotificationRootNode" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="88.0" prefWidth="461.0" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1">
-   <children>
-      <Pane fx:id="rectangleColor" maxHeight="Infinity" maxWidth="-Infinity" minWidth="32.0" prefWidth="32.0" />
-      <StackPane minWidth="-Infinity" prefWidth="88.0">
-         <children>
-            <Region fx:id="imageIcon" />
-         </children>
-      </StackPane>
-      <VBox maxWidth="Infinity" HBox.hgrow="ALWAYS">
-         <children>
-      		<Label fx:id="titleLabel" maxWidth="Infinity" text="Title:" wrapText="true" />
-      		<Label fx:id="messageLabel" maxHeight="Infinity" maxWidth="Infinity" text="Message:" wrapText="true" VBox.vgrow="ALWAYS" />
-         </children>
-      </VBox>
-      <StackPane fx:id="trayNotificationCloseButton" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="25.0" prefWidth="25.0">
-         <StackPane fx:id="icon">
-         </StackPane>
-      </StackPane>
-   </children>
+<HBox fx:id="trayNotificationRootNode" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity"
+	prefHeight="88.0" prefWidth="461.0" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1">
+	<children>
+		<Pane fx:id="rectangleColor" maxHeight="Infinity" maxWidth="-Infinity" minWidth="32.0" prefWidth="32.0" />
+		<StackPane minWidth="-Infinity" prefWidth="88.0">
+			<children>
+				<Region fx:id="trayNotificationIcon" />
+			</children>
+		</StackPane>
+		<VBox maxWidth="Infinity" HBox.hgrow="ALWAYS">
+			<children>
+				<Label fx:id="titleLabel" maxWidth="Infinity" text="Title:" wrapText="true" />
+				<Label fx:id="messageLabel" maxHeight="Infinity" maxWidth="Infinity" text="Message:" wrapText="true" VBox.vgrow="ALWAYS" />
+			</children>
+		</VBox>
+		<StackPane fx:id="trayNotificationCloseButton" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity"
+			prefHeight="25.0" prefWidth="25.0">
+			<StackPane fx:id="icon">
+			</StackPane>
+		</StackPane>
+	</children>
 </HBox>

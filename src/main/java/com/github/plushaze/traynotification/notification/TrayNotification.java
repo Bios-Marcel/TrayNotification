@@ -31,7 +31,7 @@ public final class TrayNotification
 	@FXML
 	private Pane	rectangleColor;
 	@FXML
-	private Region	imageIcon;
+	private Region	trayNotificationIcon;
 	@FXML
 	private Label	titleLabel;
 	@FXML
@@ -61,7 +61,7 @@ public final class TrayNotification
 	 */
 	TrayNotification(final Stage owner, final String title, final String body, final NotificationType notification, final boolean darkByDefault)
 	{
-		final String styleSheetLocation = darkByDefault ? "styles/trayDark.css" : "styles/defaultStyle.css";
+		final String styleSheetLocation = darkByDefault ? "/styles/trayDark.css" : "/styles/defaultStyle.css";
 		initTrayNotification(owner, title, body, notification, styleSheetLocation);
 	}
 
@@ -119,7 +119,7 @@ public final class TrayNotification
 
 		if (Objects.nonNull(styleSheetLocation))
 		{
-			stage.getScene().getStylesheets().add(styleSheetLocation);
+			stage.getScene().getStylesheets().add(this.getClass().getResource(styleSheetLocation).toExternalForm());
 		}
 
 		trayNotificationCloseButton.setOnMouseClicked(e -> dismiss());
@@ -127,7 +127,7 @@ public final class TrayNotification
 		rectangleColor.onMouseClickedProperty().bind(onMouseClicked);
 		titleLabel.onMouseClickedProperty().bind(onMouseClicked);
 		messageLabel.onMouseClickedProperty().bind(onMouseClicked);
-		imageIcon.onMouseClickedProperty().bind(onMouseClicked);
+		trayNotificationIcon.onMouseClickedProperty().bind(onMouseClicked);
 	}
 
 	/**
@@ -334,7 +334,7 @@ public final class TrayNotification
 
 	private void setImage(final String style)
 	{
-		imageIcon.setStyle(style);
+		trayNotificationIcon.setStyle(style);
 	}
 
 	/**

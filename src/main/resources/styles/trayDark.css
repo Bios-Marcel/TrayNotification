@@ -12,7 +12,7 @@
 
     -fx-content-display: graphic-only;
     
-    -fx-background-color: transparent;
+    -fx-background-color: transparent ;
 }
 
 #trayNotificationCloseButton:hover {
@@ -43,7 +43,7 @@
 	-fx-background-color: gray;
 }
 
-#imageIcon
+#trayNotificationIcon
 {
     -size: 5em;
     -fx-min-height: -size;
